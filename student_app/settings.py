@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# settings.py for dev
+BASE_URL = 'http://localhost:8000'
+
 
 # Application definition
 
