@@ -1,9 +1,12 @@
 from django.views import View
 from django.conf import settings
+from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
-from rest_framework.response import Response
+from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
 from django.http import HttpResponseBadRequest, HttpResponseServerError, HttpResponseNotFound
 
+from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 from .models import Student
@@ -62,3 +65,10 @@ def student_form(request):
             return redirect('http://localhost:8000/students') 
 
     return render(request, 'student.html', {'form': form})
+
+
+class StudentCreateView(CreateView):
+    template_name = "student.html"
+    model = Student
+    fields = ['name', 'full_name', 'contact_phone', 'contact_mail']
+    success_url = 'http://localhost:8000/students'
