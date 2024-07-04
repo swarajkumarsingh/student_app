@@ -56,8 +56,9 @@ def get_all(request):
 @api_view(['GET', 'POST'])
 def student_form(request):
     form = StudentForm(request.POST)
-    if form.is_valid():
-        form.save()
-        return redirect('http://localhost:8000/students') 
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('http://localhost:8000/students') 
 
     return render(request, 'student.html', {'form': form})
